@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Quantity 25+ BookDepot's Books</h1>
+        <h1></h1>
+                    <!-- Dropdown Form -->
+                            <form action="/updatePage" method="POST">
+                                <label for="pageSelect">Page</label>
+                                <select id="pageSelect" name="page" onchange="this.form.submit()">
+                                    <% options.forEach(option => { %>
+                                        <option value="<%= option %>" <%= option === Number(selectedPage) ? 'selected' : '' %>>
+                                            <%= option %>
+                                        </option>
+                                    <% }) %>
+                                </select>
+                            </form>
+                    <br/>
+        <div class="row">
+            <% books.forEach(book => { %>
+                <div class="col-xs-6 col-sm-4 col-md-3" style="border-style: dashed; border-width: thin;">
+                    <div class="grid-item" itemscope itemtype="http://schema.org/Book" data-bestseller="0" data-low-stock="0">
+                        <div class="grid-image">
+
+                                <img src="<%= book.imageUrl %>" alt="<%= book.title %>" class="thumbnail" style="max-height:265px;">
+
+                        </div>
+                        <div class="caption">
+                            <p style="margin-bottom:5px;">
+
+                                    <a href="https://www.bookdepot.com/Store/Details/<%= book.isbn %>B" target="_blank"><h2 style="font-size: inherit; margin:inherit;"><%= book.title %></h2></a>
+                                <span class="small"><%= book.author %></span>
+                                <br />
+                                <span class="small"><%= book.publisher %></span>
+                                <br />
+                                <span class="small"><%= book.format %></span>
+                                <br />
+                                <span class="small"><%= book.category %></span>
+                                <br />
+                                <a
+                                  href="https://www.amazon.com/s?k=<%= book.isbn %>&crid=34S2TJF6SOJM2&sprefix=9798887770383%2Caps%2C87&ref=nb_sb_noss"
+                                  target="_blank">
+                                  <span class="small">ISBN: <%= book.isbn %></span>
+                                </a>
+                                <br />
+                            </p>
+
+                            <div class="clearfix" style="margin-top:5px; margin-bottom:10px;">
+                                <div class="dropdown pull-left">
+                                    <div>
+                                        <strong style="font-size: 1.5rem; color: #000">
+                                            <span><%= book.price %></span>
+                                        </strong>
+                                    </div>
+                                    <div class="small">
+                                        <span><%= book.listqty %></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>
