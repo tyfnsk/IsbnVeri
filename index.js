@@ -37,7 +37,7 @@ app.get('/', async (req, res) => {
         await page.setViewport({ width: 1280, height: 800 });
 
         await page.goto(url, { waitUntil: 'networkidle2' });
-        await page.waitForSelector('.caption', { timeout: 10000 });
+        await page.waitForSelector('.caption', { timeout: 30000 });
 
         const dataList = await page.evaluate(() => {
             const items = [];
