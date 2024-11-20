@@ -36,7 +36,7 @@ app.get('/', async (req, res) => {
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36');
         await page.setViewport({ width: 1280, height: 800 });
 
-        await page.goto(url, { waitUntil: 'networkidle2' });
+        await page.goto(url, { waitUntil: 'load', timeout: 0 });
         await page.waitForSelector('.caption', { timeout: 30000 });
 
         const dataList = await page.evaluate(() => {
